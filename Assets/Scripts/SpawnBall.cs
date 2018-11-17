@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class SpawnBall : MonoBehaviour {
     public GameObject beachBallPrefab; //Get instance of beach ball
+
     public float y;
     public float forceApplied = 550.0f;
+    public float ballVelocity = 15.0f;
 
     private float x;
     private ScoreTracker scoreTracker;
     private bool spawn = true; //allows a ball to spawn right away
-    
+
+    GameObject[] ballsInstantiated;
 
     void Start()
     {
@@ -19,6 +22,17 @@ public class SpawnBall : MonoBehaviour {
         x = GetComponent<PlayerMovement>().screenWidth - (GetComponent<PlayerMovement>().spriteWidth + beachBallPrefab.GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2);
 
         spawnBall();
+    }
+
+    private void LateUpdate()
+    {
+
+        ballsInstantiated = GameObject.FindGameObjectsWithTag("BeachBall");
+        foreach (GameObject beachBall in ballsInstantiated)
+        {
+            var vel = beachBall.GetComponent<Rigidbody2D>().velocity;
+            beachBall.GetComponent<Rigidbody2D>().velocity = ballVelocity * vel.normalized;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -30,7 +44,7 @@ public class SpawnBall : MonoBehaviour {
             SpawnCheck();
 
             //add force to beach ball
-            other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * forceApplied);
+            //other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * ballVelocity);
         }
     }
 
@@ -47,7 +61,8 @@ public class SpawnBall : MonoBehaviour {
     {
         Vector3 spawnPos = new Vector3(Random.Range(-x, x), y, -1);
 
-        Instantiate(beachBallPrefab, spawnPos, Quaternion.identity);
+        GameObject obj = Instantiate(beachBallPrefab, spawnPos, Quaternion.identity);
+        obj.GetComponent<Rigidbody2D>().velocity = transform.up * -ballVelocity; 
         Debug.Log("Ball Spawned");
     }
 }
