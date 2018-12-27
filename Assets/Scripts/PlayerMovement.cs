@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
 		spriteWidth = GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
-		screenWidth = (Camera.main.orthographicSize * Camera.main.aspect) + spriteWidth /2; //Utilize this to set Ball SPAWN WIDTH, TELEPORT LOCATION, and BAKGROUND WIDTH, and COLLIDER BOUNDARY
+		screenWidth = (Camera.main.orthographicSize * Camera.main.aspect) + spriteWidth; //Utilize this to set Ball SPAWN WIDTH, TELEPORT LOCATION, and BAKGROUND WIDTH, and COLLIDER BOUNDARY
         Debug.Log(screenWidth);
 		left = new Vector3(-screenWidth, transform.position.y, transform.position.z);
 		right = new Vector3(screenWidth, transform.position.y, transform.position.z);

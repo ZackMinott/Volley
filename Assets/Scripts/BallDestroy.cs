@@ -5,7 +5,8 @@ using UnityEngine;
 public class BallDestroy : MonoBehaviour {
 
     [SerializeField]
-    private int hitCount = 0; 
+    private int hitCount = 0;
+    [SerializeField] GameObject ballSparklesVFX;
 	
 	// Update is called once per frame
 	void Update () {
@@ -19,9 +20,16 @@ public class BallDestroy : MonoBehaviour {
             hitCount += 1;
         } 
 
-        if(hitCount >= 6)
+        if(hitCount >= 7)
         {
+            TriggerParticleVFX();
             Destroy(this.gameObject);
         }
+    }
+
+    void TriggerParticleVFX()
+    {
+        GameObject sparkles = Instantiate(ballSparklesVFX, transform.position, transform.rotation);
+        Destroy(sparkles, .7f);
     }
 }
