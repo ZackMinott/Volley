@@ -20,7 +20,7 @@ public class BallDestroy : MonoBehaviour {
             hitCount += 1;
         } 
 
-        if(hitCount >= 7)
+        if(hitCount >= 10)
         {
             TriggerParticleVFX();
             Destroy(this.gameObject);

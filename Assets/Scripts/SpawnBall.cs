@@ -44,14 +44,14 @@ public class SpawnBall : MonoBehaviour {
             SpawnCheck();
 
             //add force to beach ball
-            //other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * ballVelocity);
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * forceApplied);
         }
     }
 
     
     void SpawnCheck()
     {
-        if (scoreTracker.score % 5 == 0)
+        if (scoreTracker.score % 3 == 0)
         {
             spawnBall();
         }

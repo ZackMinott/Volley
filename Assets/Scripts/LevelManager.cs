@@ -18,4 +18,15 @@ public class LevelManager : MonoBehaviour {
         yield return new WaitForSeconds(fadeTime);
         Application.LoadLevel(Application.loadedLevel + 1);
     }
+
+    //Call this when Replay is clicked
+    void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    void MainMenu()
+    {
+        Application.LoadLevel(0);
+    }
 }
