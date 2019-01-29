@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour {
         //Begins fading to the next scene
         float fadeTime = GameObject.Find("LevelManager").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        Application.LoadLevel(Application.loadedLevel + 1);
+        SceneManager.LoadScene(1);
     }
 
     //Call this when Replay is clicked
@@ -27,6 +27,17 @@ public class LevelManager : MonoBehaviour {
 
     void MainMenu()
     {
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
+    }
+
+    public void LoadGameOver()
+    {
+        StartCoroutine(DelayLoad("Game Over"));
+    }
+
+    IEnumerator DelayLoad(string level)
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(level);
     }
 }
