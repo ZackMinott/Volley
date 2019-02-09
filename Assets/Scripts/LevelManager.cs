@@ -8,21 +8,22 @@ public class LevelManager : MonoBehaviour {
 
 	public void LoadLevel(string name)
     {
-        StartCoroutine(fader());
+        StartCoroutine(fader(name));
     }
 
-    IEnumerator fader()
+    IEnumerator fader(string name)
     {
         //Begins fading to the next scene
         float fadeTime = GameObject.Find("LevelManager").GetComponent<Fading>().BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(name);
     }
 
     //Call this when Replay is clicked
-    void Restart()
+    public void Restart()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene("GameScreen");
+        Time.timeScale = 1f;
     }
 
     void MainMenu()
@@ -33,6 +34,7 @@ public class LevelManager : MonoBehaviour {
     public void LoadGameOver()
     {
         StartCoroutine(DelayLoad("Game Over"));
+        //StartCoroutine(fader("Game Over"));
     }
 
     IEnumerator DelayLoad(string level)

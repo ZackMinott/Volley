@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnBall : MonoBehaviour {
     public GameObject beachBallPrefab; //Get instance of beach ball
+    public AudioClip hitSound;
 
     public float y;
     public float forceApplied = 550.0f;
@@ -45,6 +46,7 @@ public class SpawnBall : MonoBehaviour {
 
             //add force to beach ball
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * forceApplied);
+            GetComponent<AudioSource>().PlayOneShot(hitSound, 0.7f);
         }
     }
 
